@@ -11,13 +11,17 @@ Este algoritmo, va a ser importante porque va a ahorrar tiempo, tanto a los due�
 1. Desplegar el menú  
 2. Crear una variable “comida” 
 3. Mientras que “comida” sea mayor que 0 
+
        3.1. Pedirle al usuario lo que va a comer 
        3.2. Volver al paso 3 
+  
 4. Sumar todas las opciones que el usuario ha escogido (Operaciones) 
 5. Mostrar el monto final  
 6. Cuando ya terminé de comer/pagar, preguntar al usuario si quiere agregar propina  
 7. Si el usuario quiere agregar propina 
+
        7.1 Pedirle que digite el monto de propina 
+ 
 8. Pedirle al usuario que califique la atención 
 9. Si el usuario quiere calificar 
        9.1. Pedirle al usuario que introduzca la satisfacción 
