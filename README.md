@@ -8,20 +8,17 @@ Este algoritmo, va a ser importante porque va a ahorrar tiempo, tanto a los due�
 ## Código 
 
 
-1. Desplegar el menú  
-2. Crear una variable “comida” 
-3. Mientras que “comida” sea mayor que 0 
+1. Desplegar el menú (el usuario va a elegir sus opciones) 
+2. Crear una variable para cada opción (entrada, plato fuerte, guarnición y postre)
+3. Pedirle al usuario que vaya escogiendo su comida (usar las variables del punto 2, e incluye la propina)
+4. Mientras que las variables no esten en el rango de opciones
 
-       3.1. Pedirle al usuario lo que va a comer 
-       3.2. Volver al paso 3 
-  
-4. Sumar todas las opciones que el usuario ha escogido (Operaciones) 
-5. Mostrar el monto final  
-6. Cuando ya terminé de comer/pagar, preguntar al usuario si quiere agregar propina  
-7. Si el usuario quiere agregar propina 
+       3.1. Notificarle al usuario que digitó un número no válido
+       3.2. Pedirle al usuario que vuelvva a digitar la opción 
 
-       7.1 Pedirle que digite el monto de propina 
- 
+5. Mandar a llamar a las funciones dependiendo de en que parte este el usuario. 
+6. Sumar todas las opciones que el usuario ha escogido (Operaciones) 
+7. Mostrar el monto final  
 8. Pedirle al usuario que califique la atención 
 9. Si el usuario quiere calificar 
        9.1. Pedirle al usuario que introduzca la satisfacción 
