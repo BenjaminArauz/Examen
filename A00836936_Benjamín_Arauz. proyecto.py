@@ -1,19 +1,84 @@
 costo_final = 0
-tiempo = 0
 tiempo_final = 0
-def costoEntrada(costo_entrada):
+dic_palabras = {
+    'Entrada':'',
+    'Plato fuerte':'',
+    'Guarnicion':'',
+    'Postre':''
+}
+def main_menu(dic_palabras): #Principal menú para iniciar el programa
+    opcion_entrada = int(input("¿Quiere agregar entrada? Si=1, No=2\n"))
+    costo_entrada = 0
+    tiempo_entrada = 0
+    palabra_entrada = ''
+    while (opcion_entrada != 1) and (opcion_entrada != 2):
+        opcion_entrada = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
+    if opcion_entrada == 1:
+        costo_entrada,tiempo_entrada,palabra_entrada = costoEntrada(costo_entrada)
+        dic_palabras['Entrada'] = palabra_entrada
+    opcion_plato_fuerte = int(input("¿Quiere agregar plato fuerte? Si=1, No=2\n"))
+    costo_plato_fuerte = 0
+    tiempo_plato_fuerte = 0
+    palabra_plato_fuerte = ''
+    while (opcion_plato_fuerte != 1) and (opcion_plato_fuerte != 2):
+        opcion_plato_fuerte = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
+    if opcion_plato_fuerte == 1:
+        costo_plato_fuerte,tiempo_plato_fuerte,palabra_plato_fuerte = costoPlatoFuerte(costo_plato_fuerte)
+        dic_palabras['Plato fuerte'] = palabra_plato_fuerte
+    opcion_guarnicion = int(input("¿Quiere agregar guarnición? Si=1, No=2\n"))
+    costo_guarnicion = 0
+    tiempo_guarnicion = 0
+    palabra_guarnicion = ''
+    while (opcion_guarnicion != 1) and (opcion_guarnicion!= 2):
+        opcion_guarnicion = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
+    if opcion_guarnicion == 1:
+        costo_guarnicion,tiempo_guarnicion,palabra_guarnicion = costoGuarnicion(costo_guarnicion)
+        dic_palabras['Guarnicion'] = palabra_guarnicion
+    opcion_postre = int(input("¿Quiere agregar postre? Si=1, No=2\n"))
+    costo_postre = 0
+    tiempo_postre = 0
+    palabra_postre = ''
+    while (opcion_postre != 1) and (opcion_postre!= 2):
+        opcion_postre = int(input("Número no válido, porfavor ingrese de nuevo (Si=1, No=2\n"))
+    if opcion_postre == 1:
+        costo_postre,tiempo_postre,palabra_postre = costoPostre(costo_postre)
+        dic_palabras['Postre'] = palabra_postre
+    opcion_propina = int(input("¿Quiere agregar propina? Si=1, 2=No\n"))
+    costo_propina = 0
+    while (opcion_propina != 1) and (opcion_propina != 2):
+        opcion_propina = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
+    if opcion_propina == 1:
+        costo_propina = Propina(costo_propina)
+    atencion_cliente = int(input("¿Quiere calificar la atención al cliente? Si=1, No=2"))
+    while (atencion_cliente!= 1) and (atencion_cliente != 2):
+        atencion_cliente = int(input("Número no válido, ¿quiere calificar la atención al cliente? Si=1, No=2"))
+    if atencion_cliente == 1:
+        palabra_cliente = Atencion_al_cliente(atencion_cliente)
+    print("El resumen de su platillo es:")
+    for word in dic_palabras:
+        print(dic_palabras[word])
+    if atencion_cliente == 1:
+        print(palabra_cliente)
+    cambiar = int(input("¿Desea modificar algún elemento? 1=Si, 2=No"))
+    if cambiar == 1:
+        cambiar_menu(cambiar,dic_palabras)
+    costo_final = costo_postre + costo_guarnicion + costo_entrada + costo_plato_fuerte + costo_propina
+    print(f"El costo final de su platillo es de {costo_final}")
+    tiempo_final = max(tiempo_entrada,tiempo_plato_fuerte,tiempo_guarnicion,tiempo_postre)
+    print(f"El tiempo estimado que se va a demorar su platillo es {tiempo_final}-{tiempo_final+5} minutos")
+def costoEntrada(costo_entrada): #Opciones para la entrada
     palabra = '1. Entrada: '
     print("Porfavor selecciona tu entrada")
     lista_entrada = ["1. Ensalada","2. Frijoles","3. Mini tacos","4. Pan"]
-    for entry in lista_entrada:
+    for entry in lista_entrada: #Imprimir las opciones
         print(entry)
     entrada = int(input("Porfavor, selecciona tu opción, basandose en los números\n"))
-    while (entrada < 1) or (entrada > 4):
+    while (entrada < 1) or (entrada > 4): #Para verificar que ponga un número correcto
         print("Número no válido, porfavor digite basandose en las opciones")
         for not_entry in lista_entrada:
             print(not_entry)
         entrada = int(input("Porfavor selecciona de nuevo tu opción\n"))
-    if entrada == 1:
+    if entrada == 1: 
         print("Porfavor escoja su tipo de ensalada")
         dic_ensalada = {
             "1. Cesar ($60)":15,
@@ -29,7 +94,7 @@ def costoEntrada(costo_entrada):
                 print(notsalad)
             ensalada = int(input("Porfavor selecciona tu opción, basandose en los números\n"))
         ensalada = str(ensalada)
-        for price_salad in dic_ensalada:
+        for price_salad in dic_ensalada: #Verificar que tipo de platillo es y con eso guardar el plato, costo y tiempo
             if price_salad[0] == ensalada:
                 costo_entrada = int(price_salad[(price_salad.find("$")+1):(price_salad.find("$")+3)])
                 tiempo_entrada = int(dic_ensalada[price_salad])
@@ -101,7 +166,7 @@ def costoEntrada(costo_entrada):
                 tiempo_entrada = int(dic_pan[price_bread])
                 palabra += price_bread[3:(price_bread.find("(")-1)]
     return costo_entrada,tiempo_entrada,palabra
-def costoPlatoFuerte(costo_plato_fuerte):
+def costoPlatoFuerte(costo_plato_fuerte): #Opciones para la plato fuerte
     palabra = '2. Plato fuerte: '
     print("Porfavor selecciona tu plato fuerte")
     lista_plato_fuerte = ["1. Carne","2. Pollo","3. Chuleta","4. Pescado"]
@@ -211,7 +276,7 @@ def costoPlatoFuerte(costo_plato_fuerte):
                 else:
                     palabra += 'Pescado ' + price_fish[3:(price_fish.find("(")-1)].lower()
     return costo_plato_fuerte,tiempo_plato_fuerte,palabra
-def costoGuarnicion(costo_guarnicion):
+def costoGuarnicion(costo_guarnicion): #Opciones para la guarnicón
     palabra = '3. Guarnición: '
     print("Porfavor selecciona tu guarnición")
     lista_guarnicion = ["1. Tortillas","2. Arroz","3. Papas","4. Ensalada"]
@@ -312,7 +377,7 @@ def costoGuarnicion(costo_guarnicion):
                 else:
                     palabra += 'Ensalada ' + price_salad[3:(price_salad.find("(")-1)].lower()
     return costo_guarnicion,tiempo_guarnicion,palabra
-def costoPostre(costo_postre):
+def costoPostre(costo_postre): #Opciones para el postre
     palabra = '4. Postre: '
     print("Porfavor selecciona tu postre")
     lista_postre = ["1. Gelatina","2. Pastel","3. Alfajores","4. Helado"]
@@ -412,56 +477,64 @@ def costoPostre(costo_postre):
                 else:
                     palabra += 'Helado de ' + price_ice_cream[3:(price_ice_cream.find("(")-1)].lower()
     return costo_postre,tiempo_postre,palabra
-def Propina(costo_propina):
+def Propina(costo_propina): #Opciones de propina
     costo_propina = int(input("Porfavor agregar la propina\n"))
-    return costo_propina
-lista_palabras = []    
-opcion_entrada = int(input("¿Quiere agregar entrada? Si=1, No=2\n"))
-costo_entrada = 0
-tiempo_entrada = 0
-palabra_entrada = ''
-while (opcion_entrada != 1) and (opcion_entrada != 2):
-    opcion_entrada = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
-if opcion_entrada == 1:
-    costo_entrada,tiempo_entrada,palabra_entrada = costoEntrada(costo_entrada)
-    lista_palabras.append(palabra_entrada)
-opcion_plato_fuerte = int(input("¿Quiere agregar plato fuerte? Si=1, No=2\n"))
-costo_plato_fuerte = 0
-tiempo_plato_fuerte = 0
-palabra_plato_fuerte = ''
-while (opcion_plato_fuerte != 1) and (opcion_plato_fuerte != 2):
-    opcion_plato_fuerte = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
-if opcion_plato_fuerte == 1:
-    costo_plato_fuerte,tiempo_plato_fuerte,palabra_plato_fuerte = costoPlatoFuerte(costo_plato_fuerte)
-    lista_palabras.append(palabra_plato_fuerte)
-opcion_guarnicion = int(input("¿Quiere agregar guarnición? Si=1, No=2\n"))
-costo_guarnicion = 0
-tiempo_guarnicion = 0
-palabra_guarnicion = ''
-while (opcion_guarnicion != 1) and (opcion_guarnicion!= 2):
-    opcion_guarnicion = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
-if opcion_guarnicion == 1:
-    costo_guarnicion,tiempo_guarnicion,palabra_guarnicion = costoGuarnicion(costo_guarnicion)
-    lista_palabras.append(palabra_guarnicion)
-opcion_postre = int(input("¿Quiere agregar postre? Si=1, No=2\n"))
-costo_postre = 0
-tiempo_postre = 0
-palabra_postre = ''
-while (opcion_postre != 1) and (opcion_postre!= 2):
-    opcion_postre = int(input("Número no válido, porfavor ingrese de nuevo (Si=1, No=2\n"))
-if opcion_postre == 1:
-    costo_postre,tiempo_postre,palabra_postre = costoPostre(costo_postre)
-    lista_palabras.append(palabra_postre)
-opcion_propina = int(input("¿Quiere agregar propina? Si=1, 2=No\n"))
-costo_propina = 0
-while (opcion_propina != 1) and (opcion_propina != 2):
-    opcion_propina = int(input("Número no válido, porfavor ingrese de nuevo Si=1, No=2\n"))
-if opcion_propina == 1:
-    costo_propina = Propina(costo_propina)
-print("El resumen de su platillo es:")
-for word in lista_palabras:
-    print(word)
-costo_final = costo_postre + costo_guarnicion + costo_entrada + costo_plato_fuerte + costo_propina
-print(f"El costo final de su platillo es de {costo_final}")
-tiempo_final = max(tiempo_entrada,tiempo_plato_fuerte,tiempo_guarnicion,tiempo_postre)
-print(f"El tiempo estimado que se va a demorar su platillo es {tiempo_final}-{tiempo_final+5} minutos")
+    return costo_propina  
+def Atencion_al_cliente(atencion_cliente):
+    atencion = int(input("Porfavor agrega la atención al cliente:\n1.Muy malo\n2.Malo\n3.Regular\n4.Bueno\n5.Muy bueno"))
+    while atencion < 1 or atencion > 5:
+        atencion = int(input("Número no válido, porfavor agrega la atención al cliente:\n1.Muy malo\n2.Malo\n3.Regular\n4.Bueno\n5.Muy bueno"))
+    if atencion == 1:
+        palabra = 'Su atención de parte del cliente fue muy malo'
+    elif atencion == 2:
+        palabra = 'Su atención de parte del cliente fue malo'
+    elif atencion == 3:
+        palabra = 'Su atención de parte del cliente fue regular'
+    elif atencion == 4:
+        palabra = 'Su atención de parte del cliente fue bueno'
+    elif atencion == 5:
+        palabra = 'Su atención de parte del cliente fue muy bueno'
+    return palabra
+def cambiar_menu(cambiar,dic_palabras,costo_propina): #Cambiar menú
+    opcion_cambiar = int(input("Eliga la opción a cambiar\n1. Entrada\n2. Plato fuerte\n3. Guarnición\n4. Postre\n0. Salir"))
+    costo_entrada = 0
+    tiempo_entrada = 0
+    palabra_entrada = ''
+    costo_plato_fuerte = 0
+    tiempo_plato_fuerte = 0
+    palabra_plato_fuerte = ''
+    costo_guarnicion = 0
+    tiempo_guarnicion = 0
+    palabra_guarnicion = ''
+    costo_postre = 0
+    tiempo_postre = 0
+    palabra_postre = ''
+    while opcion_cambiar != 0:
+        if opcion_cambiar == 1:
+            costo_entrada,tiempo_entrada,palabra_entrada = costoEntrada(costo_entrada)
+            dic_palabras['Entrada'] = palabra_entrada
+        elif opcion_cambiar == 2:
+            costo_plato_fuerte,tiempo_plato_fuerte,palabra_plato_fuerte = costoPlatoFuerte(costo_plato_fuerte)
+            dic_palabras['Plato fuerte'] = palabra_plato_fuerte
+        elif opcion_cambiar == 3:
+            costo_guarnicion,tiempo_guarnicion,palabra_guarnicion = costoGuarnicion(costo_guarnicion)
+            dic_palabras['Guarnicion'] = palabra_guarnicion   
+        elif opcion_cambiar == 4:
+            costo_postre,tiempo_postre,palabra_postre = costoPostre(costo_postre)
+            dic_palabras['Postre'] = palabra_postre
+        opcion_cambiar = int(input("Eliga la opción a cambiar\n1. Entrada\n2. Plato fuerte\n3. Guarnición\n4. Postre\n0. Salir"))
+    costo_final = costo_postre + costo_guarnicion + costo_entrada + costo_plato_fuerte + costo_propina
+    print("El resumen de su platillo es:")
+    for word in dic_palabras:
+        print(dic_palabras[word])
+    print(f"El costo final de su platillo es de {costo_final}")
+    tiempo_final = max(tiempo_entrada,tiempo_plato_fuerte,tiempo_guarnicion,tiempo_postre)
+    print(f"El tiempo estimado que se va a demorar su platillo es {tiempo_final}-{tiempo_final+5} minutos")
+main_menu(dic_palabras)
+"""
+Funciones que he cambiado
+1. He implementado más comentarios en el código para que se pueda entender de una manera más facil, porque hice ciertas cosas.
+2. Implemente el diccionario principalmente, para poder obtener el pedido que el usuario hizo, especialmente la palabra para al 
+final mostrar el resumen de su platillo, además creé un diccionario para los platos, para poder identificar el plato que escojieron, 
+el costo, el tiempo y la palabra del plato.
+"""
