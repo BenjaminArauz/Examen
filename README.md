@@ -22,3 +22,7 @@ Este algoritmo, va a ser importante porque va a ahorrar tiempo, tanto a los due�
 8. Pedirle al usuario que califique la atención 
 9. Si el usuario quiere calificar 
        9.1. Pedirle al usuario que introduzca la satisfacción 
+       
+## Funciones que he cambiado
+1. He implementado más comentarios en el código para que se pueda entender de una manera más facil, porque hice ciertas cosas.
+2. Implemente el diccionario principalmente, para poder obtener el pedido que el usuario hizo, especialmente la palabra para al final mostrar el resumen de su platillo, además creé un diccionario para los platos, para poder identificar el plato que escojieron, el costo, el tiempo y la palabra del plato.
