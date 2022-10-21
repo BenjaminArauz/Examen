@@ -59,9 +59,6 @@ def main_menu(dic_palabras): #Principal menú para iniciar el programa
         print(dic_palabras[word])
     if atencion_cliente == 1:
         print(palabra_cliente)
-    cambiar = int(input("¿Desea modificar algún elemento? 1=Si, 2=No"))
-    if cambiar == 1:
-        cambiar_menu(cambiar,dic_palabras)
     costo_final = costo_postre + costo_guarnicion + costo_entrada + costo_plato_fuerte + costo_propina
     print(f"El costo final de su platillo es de {costo_final}")
     tiempo_final = max(tiempo_entrada,tiempo_plato_fuerte,tiempo_guarnicion,tiempo_postre)
@@ -495,41 +492,6 @@ def Atencion_al_cliente(atencion_cliente):
     elif atencion == 5:
         palabra = 'Su atención de parte del cliente fue muy bueno'
     return palabra
-def cambiar_menu(cambiar,dic_palabras,costo_propina): #Cambiar menú
-    opcion_cambiar = int(input("Eliga la opción a cambiar\n1. Entrada\n2. Plato fuerte\n3. Guarnición\n4. Postre\n0. Salir"))
-    costo_entrada = 0
-    tiempo_entrada = 0
-    palabra_entrada = ''
-    costo_plato_fuerte = 0
-    tiempo_plato_fuerte = 0
-    palabra_plato_fuerte = ''
-    costo_guarnicion = 0
-    tiempo_guarnicion = 0
-    palabra_guarnicion = ''
-    costo_postre = 0
-    tiempo_postre = 0
-    palabra_postre = ''
-    while opcion_cambiar != 0:
-        if opcion_cambiar == 1:
-            costo_entrada,tiempo_entrada,palabra_entrada = costoEntrada(costo_entrada)
-            dic_palabras['Entrada'] = palabra_entrada
-        elif opcion_cambiar == 2:
-            costo_plato_fuerte,tiempo_plato_fuerte,palabra_plato_fuerte = costoPlatoFuerte(costo_plato_fuerte)
-            dic_palabras['Plato fuerte'] = palabra_plato_fuerte
-        elif opcion_cambiar == 3:
-            costo_guarnicion,tiempo_guarnicion,palabra_guarnicion = costoGuarnicion(costo_guarnicion)
-            dic_palabras['Guarnicion'] = palabra_guarnicion   
-        elif opcion_cambiar == 4:
-            costo_postre,tiempo_postre,palabra_postre = costoPostre(costo_postre)
-            dic_palabras['Postre'] = palabra_postre
-        opcion_cambiar = int(input("Eliga la opción a cambiar\n1. Entrada\n2. Plato fuerte\n3. Guarnición\n4. Postre\n0. Salir"))
-    costo_final = costo_postre + costo_guarnicion + costo_entrada + costo_plato_fuerte + costo_propina
-    print("El resumen de su platillo es:")
-    for word in dic_palabras:
-        print(dic_palabras[word])
-    print(f"El costo final de su platillo es de {costo_final}")
-    tiempo_final = max(tiempo_entrada,tiempo_plato_fuerte,tiempo_guarnicion,tiempo_postre)
-    print(f"El tiempo estimado que se va a demorar su platillo es {tiempo_final}-{tiempo_final+5} minutos")
 main_menu(dic_palabras)
 """
 Funciones que he cambiado
